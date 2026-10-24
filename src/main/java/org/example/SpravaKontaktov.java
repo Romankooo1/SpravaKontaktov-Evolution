@@ -49,8 +49,8 @@ public class SpravaKontaktov implements CommandLineRunner {
         System.out.println("Zadajte svoj E-mail: ");
         String email = scan.nextLine();
 
-        Kontakt novyKontaktr = new Kontakt(meno, telefon, email);
-        kontaktRepository.save(novyKontaktr);
+        Kontakt novyKontakt = new Kontakt(meno, telefon, email);
+        kontaktRepository.save(novyKontakt);
         System.out.println("Kontakt bol úspešne uložený pomocou Spring Dáta JPA!");
     }
 

@@ -36,7 +36,7 @@ public class Kontakt {
     public Long getId() { return id; }
     public void setID(Long id){this.id = id; }
 
-    public String GetMeno() {return meno;}
+    public String getmeno() {return meno;}
     public void setMeno(String meno){this.meno = meno;}
 
     public String getTelefon(){return telefon;}
