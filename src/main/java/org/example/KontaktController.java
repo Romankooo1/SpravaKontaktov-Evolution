@@ -2,13 +2,8 @@ package org.example;
 
 import jakarta.persistence.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController //Táto anotácia povie Spring Bootu, že trieda funguje ako REST API koncový bod.
@@ -41,10 +36,27 @@ public class KontaktController {
     @DeleteMapping("/{id}")
     // Anotácia @DeleteMapping("/{id}") hovorí, že reagujeme na HTTP DELETE požiadavku.
     // To "{id}" v zátvorke znamená, že v adrese očakávame premenné číslo (napr. /api/kontakty/3).
-    public void vymazKontakt(@PathVariable Long id){
+    public void vymazKontakt(@PathVariable Long id) {
         /* Anotácia @PathVariable hovorí Springu: „Vezmi to číslo z webovej adresy
          a vlož ho do tejto Java premennej 'id'.*/
         kontaktRepository.deleteById(id);
         // Pomocou repozitára zavoláme metódu .deleteById(), ktorá vymaže riadok priamo z MySQL.
+    }
+
+    // 4.Fáza: Úprava / Aktualizácia UPDATE
+    @PutMapping("/{id}")
+     /*Anotácia @PutMapping("/{id}") spracováva HTTP PUT požiadavky pre úpravu dát.
+    Prijíma ID v adrese a zároveň nový upravený balíček dát v tele (RequestBody).*/
+
+    public Kontakt upravKontakt(@PathVariable Long id, @RequestBody Kontakt upraveneData) {
+        // 1. Krok: Vytiahneme si pôvodný kontakt z databázy podľa ID
+        return kontaktRepository.findById(id).map(kontakt -> {
+            // 2. Krok: Prepíšeme staré údaje tými novými, ktoré nám prišli z internetu
+            kontakt.setMeno(upraveneData.getMeno());
+            kontakt.setTelefon(upraveneData.getTelefon());
+            kontakt.setEmail(upraveneData.getEmail());
+            // 3. Krok: Uložíme aktualizovaný kontakt späť do MySQL databázy
+            return kontaktRepository.save(kontakt);
+        }).orElseThrow(() -> new RuntimeException("Kontakt s ID " + id + " sa nenašiel!"));
     }
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Správa Kontaktov</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; margin: 40px; }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #4CAF50; color: white; }
+        tr:hover { background-color: #f1f1f1; }
+    </style>
+</head>
+<body>
+<h1> Môj zoznam kontaktov</h1>
+<p>Vitajte v prvej skutočnej webovej aplikácii!</p>
+
+<table>
+    <thead>
+        <tr>
+        <th>ID</th>
+        <th>Meno</th>
+        <th>Telefon</th>
+        <th>E-mail</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="k : ${kontaktyNaWebe}">
+        <td th:text="${k.id}">ID</td>
+        <td th:text="${k.meno}">Meno</td>
+        <td th:text="${k.telefon}">Telefón</td>
+        <td th:text="${k.email}">E-mail</td>
+    </tr>
+    </tbody>
+    </table>
+</body>
+</html>
