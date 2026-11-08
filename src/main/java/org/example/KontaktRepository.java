@@ -13,8 +13,8 @@ public interface KontaktRepository  extends JpaRepository<Kontakt, Long>{
     // .findById(id)        -> nájde jeden konkrétny kontakt podľa ID
 }
 
-/*"Čo je to Spring Data JPA a JpaRepository?"
- "Je to rozhranie, ktoré ma odstrihne od písania manuálneho
+/*Čo je to Spring Data JPA a JpaRepository?
+Je to rozhranie, ktoré ma odstrihne od písania manuálneho
 SQL kódu. Spring na pozadí sám vygeneruje implementáciu
 pre základné CRUD operácie (ukladanie, čítanie, mazanie),
-takže sa môžem sústrediť čisto na biznis logiku."*/
+takže sa môžem sústrediť čisto na biznis logiku.*/

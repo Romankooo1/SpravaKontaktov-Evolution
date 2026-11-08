@@ -26,8 +26,8 @@
         </tr>
     </thead>
     <tbody>
-    <tr th:each="k : ${kontaktyNaWebe}">
-        <td th:text="${k.id}">ID</td>
+    <tr th:each="k, rowStat : ${kontaktyNaWebe}">
+        <td th:text="${rowStat.count}">1</td>
         <td th:text="${k.meno}">Meno</td>
         <td th:text="${k.telefon}">Telefón</td>
         <td th:text="${k.email}">E-mail</td>
