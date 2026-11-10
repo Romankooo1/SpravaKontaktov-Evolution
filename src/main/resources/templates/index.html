@@ -16,6 +16,15 @@
 <h1> Môj zoznam kontaktov</h1>
 <p>Vitajte v prvej skutočnej webovej aplikácii!</p>
 
+<div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #ddd;">
+    <h3>➕ Pridať nový kontakt</h3>
+    <form th:action="@{/pridat}" method="post" style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <input type="text" name="meno" placeholder="Meno a priezvisko" required style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; flex: 1;">
+        <input type="text" name="telefon" placeholder="Telefónne číslo" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; flex: 1;">
+        <input type="email" name="email" placeholder="E-mailová adresa" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px; flex: 1;">
+        <button type="submit" style="background-color: #4CAF50; color: white; padding: 8px 15px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Uložiť kontakt</button>
+    </form>
+</div>
 <table>
     <thead>
         <tr>
