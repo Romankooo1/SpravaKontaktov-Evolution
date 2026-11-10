@@ -48,7 +48,7 @@ public class KontaktController {
      /*Anotácia @PutMapping("/{id}") spracováva HTTP PUT požiadavky pre úpravu dát.
     Prijíma ID v adrese a zároveň nový upravený balíček dát v tele (RequestBody).*/
 
-    public Kontakt upravKontakt(@PathVariable Long id, @RequestBody Kontakt upraveneData) {
+    public Kontakt upravKontakt(@PathVariable Long id, @ModelAttribute Kontakt upraveneData) {
         // 1. Krok: Vytiahneme si pôvodný kontakt z databázy podľa ID
         return kontaktRepository.findById(id).map(kontakt -> {
             // 2. Krok: Prepíšeme staré údaje tými novými, ktoré nám prišli z internetu

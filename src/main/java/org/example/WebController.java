@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 /*Používame @Controller (bez Rest!). To hovorí Springu,že nejdeme vracať surové dáta,
@@ -36,4 +37,17 @@ public class WebController {
         return "redirect:/";
 
     }
-}
+    @PostMapping("/upravit/{id}")
+    public String spracujUpravuKontaktu(@PathVariable Long id, @ModelAttribute Kontakt upraveneData) {
+        // Vytiahneme pôvodný kontakt, prepíšeme ho a uložíme do MySQL
+        kontaktRepository.findById(id).map(kontakt -> {
+            kontakt.setMeno(upraveneData.getMeno());
+            kontakt.setTelefon(upraveneData.getTelefon());
+            kontakt.setEmail(upraveneData.getEmail());
+            return kontaktRepository.save(kontakt);
+        }).orElseThrow(() -> new RuntimeException("Kontakt nenašiel"));
+
+        // Návrat na domovskú stránku (obnovenie zoznamu)
+        return "redirect:/";
+        }
+    }

@@ -36,10 +36,23 @@
     </thead>
     <tbody>
     <tr th:each="k, rowStat : ${kontaktyNaWebe}">
+        <!-- Tieto políčka zostávajú rovnaké -->
         <td th:text="${rowStat.count}">1</td>
-        <td th:text="${k.meno}">Meno</td>
-        <td th:text="${k.telefon}">Telefón</td>
-        <td th:text="${k.email}">E-mail</td>
+
+        <!-- ZMENA: Forma na úpravu priamo v riadku tabuľky -->
+        <td colspan="3" style="padding: 0;">
+            <!-- Každý riadok bude malý formulár, ktorý pošle dáta na náš REST API -->
+            <form th:action="@{/upravit/{id}(id=${k.id})}" method="post" style="display: flex; width: 100%; gap: 5px; padding: 5px;">
+                <!-- Skrytý trik pre Thymeleaf, aby prehliadač vedel, že posielame PUT, nie POST -->
+                <input type="hidden" name="_method" value="put"/>
+
+                <input type="text" name="meno" th:value="${k.meno}" required style="padding: 6px; border: 1px solid #ccc; border-radius: 4px; flex: 1;">
+                <input type="text" name="telefon" th:value="${k.telefon}" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px; flex: 1;">
+                <input type="email" name="email" th:value="${k.email}" style="padding: 6px; border: 1px solid #ccc; border-radius: 4px; flex: 1;">
+
+                <button type="submit" style="background-color: #008CBA; color: white; padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">📝 Uložiť zmenu</button>
+            </form>
+        </td>
     </tr>
     </tbody>
     </table>
